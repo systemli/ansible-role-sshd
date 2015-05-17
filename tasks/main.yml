@@ -1,0 +1,29 @@
+- name: ensure backports repository is present
+  apt_repository:
+    repo: "deb {{ sshd_apt_backports_url }} {{ sshd_apt_backports_distribution }} main"
+
+- name: ensure openssh-server is present
+  apt:
+    pkg: openssh-server
+    state: latest
+    install_recommends: no
+    force: yes
+    default_release: "{{ sshd_apt_backports_distribution }}"
+  notify: restart sshd
+
+- name: ensure ed25519 host key is present
+  command: ssh-keygen -q -t ed25519 -N "" -f ssh_host_ed25519_key
+  args:
+    chdir: /etc/ssh
+    creates: /etc/ssh/ssh_host_ed25519_key
+
+- name: ensure openssh config is latest
+  template:
+    src: sshd_config.j2
+    dest: /etc/ssh/sshd_config
+  notify: restart sshd
+
+- name: ensure sftp chroot group is present
+  group:
+    name: "{{ sshd_sftp_chroot_group }}"
+  when: sshd_sftp_chroot == 'yes'
