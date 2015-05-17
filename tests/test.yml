@@ -4,3 +4,4 @@
   roles:
     -
       role: ansible-sshd
+      sshd_apt_backports_url: "http://de.archive.ubuntu.com/ubuntu/"
