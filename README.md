@@ -45,7 +45,7 @@ Defaults:
     sshd_use_pam: "yes"
     sshd_use_dns: "no"
     sshd_sftp_chroot: "no"
-    sshd_sftp_chroot_group: sftoonly
+    sshd_sftp_chroot_group: sftponly
 
 
 Example Playbook
