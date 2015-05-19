@@ -22,6 +22,11 @@
     creates: /etc/ssh/ssh_host_ed25519_key
   when: openssh_version.stdout | version_compare('6.5', '>=')
 
+- name: determine if ed25519 host key exists
+  stat:
+    path: /etc/ssh/ssh_host_ed25519_key
+  register: ed25519_key
+
 - name: ensure openssh config is latest
   template:
     src: sshd_config.j2

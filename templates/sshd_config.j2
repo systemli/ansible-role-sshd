@@ -11,6 +11,9 @@ Protocol 2
 HostKey /etc/ssh/ssh_host_rsa_key
 HostKey /etc/ssh/ssh_host_dsa_key
 HostKey /etc/ssh/ssh_host_ecdsa_key
+{% if ed25519_key|default(False) and ed25519_key.stat.exists %}
+HostKey /etc/ssh/ssh_host_ed25519_key
+{% endif%}
 #Privilege Separation is turned on for security
 UsePrivilegeSeparation {{ sshd_use_privilege_seperation }}
 
