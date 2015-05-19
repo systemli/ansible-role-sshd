@@ -7,7 +7,7 @@ sshd_syslog_facility: AUTH
 sshd_log_level: INFO
 sshd_use_privilege_seperation: "yes"
 sshd_key_regeneration_interval: 3600
-sshd_server_key_bits: 1024
+sshd_server_key_bits: 4096
 sshd_login_grace_time: 120
 sshd_permit_root_login: "no"
 sshd_strict_modes: "yes"
