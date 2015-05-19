@@ -1,7 +1,7 @@
 ansible-sshd
 ============
 
-[![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-sshd-blue.svg)](https://galaxy.ansible.com/list#/roles/3809) [![Build Status](https://travis-ci.org/systemli/ansible-sshd.svg)](https://travis-ci.org/systemli/ansible-sshd)
+[![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-sshd-blue.svg)](https://galaxy.ansible.com/list#/roles/3844) [![Build Status](https://travis-ci.org/systemli/ansible-sshd.svg)](https://travis-ci.org/systemli/ansible-sshd)
 
 Role to install & maintain the OpenSSH Daemon
 
