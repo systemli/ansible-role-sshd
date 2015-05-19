@@ -93,13 +93,11 @@ UsePAM {{ sshd_use_pam }}
 
 UseDNS {{ sshd_use_dns }}
 
-{% if sshd_sftp_chroot == 'yes' %}
 Subsystem sftp internal-sftp
 
+{% if sshd_sftp_chroot == 'yes' %}
 Match Group {{ sshd_sftp_chroot_group }}
         ChrootDirectory %h
         ForceCommand internal-sftp
         AllowTcpForwarding no
-{% else %}
-Subsystem sftp /usr/lib/openssh/sftp-server
 {% endif %}
