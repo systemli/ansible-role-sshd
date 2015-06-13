@@ -1,14 +1,9 @@
-- name: ensure backports repository is present
-  apt_repository:
-    repo: "deb {{ sshd_apt_backports_url }} {{ sshd_apt_backports_distribution }} main"
-
 - name: ensure openssh-server is present
   apt:
     pkg: openssh-server
     state: latest
     install_recommends: no
     force: yes
-    default_release: "{{ sshd_apt_backports_distribution }}"
   notify: restart sshd
 
 - name: register openssh-server version
