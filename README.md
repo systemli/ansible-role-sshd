@@ -27,6 +27,7 @@ Defaults:
     sshd_authorized_keys_file: "%h/.ssh/authorized_keys"
     sshd_password_authentication: "no"
     sshd_allow_users: []
+    sshd_allow_groups: []
     sshd_ignore_rhosts: "yes"
     sshd_rhosts_rsa_authentication: "no"
     sshd_hostbased_authentication: "no"
