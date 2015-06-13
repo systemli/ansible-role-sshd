@@ -12,9 +12,6 @@ The playbook requires no special configuration, but offers a bunch of options.
 
 Defaults:
 
-    sshd_apt_backports_url: "http://ftp.de.debian.org/debian/"
-    sshd_apt_backports_distribution: "{{ ansible_distribution_release }}-backports"
-    
     sshd_port: 22
     sshd_listen_address: 0.0.0.0
     sshd_syslog_facility: AUTH
