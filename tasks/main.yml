@@ -16,7 +16,8 @@
   args:
     chdir: /etc/ssh
     creates: /etc/ssh/ssh_host_ed25519_key
-  when: openssh_version.stdout | version_compare('6.5', '>=')
+  when: openssh_version == true and
+        openssh_version.stdout | version_compare('6.5', '>=')
 
 - name: determine if ed25519 host key exists
   stat:
