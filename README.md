@@ -33,7 +33,7 @@ Defaults:
     sshd_hostbased_authentication: "no"
     sshd_permit_empty_passwords: "no"
     sshd_challenge_response_authentication: "no"
-    sshd_x11_forwarding: "yes"
+    sshd_x11_forwarding: "no"
     sshd_x11_display_offset: 10
     sshd_print_motd: "no"
     sshd_print_last_log: "yes"
