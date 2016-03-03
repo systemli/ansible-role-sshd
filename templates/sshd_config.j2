@@ -78,7 +78,8 @@ PrintLastLog {{ sshd_print_last_log }}
 TCPKeepAlive {{ sshd_tcp_keep_alive }}
 #UseLogin no
 
-#MaxStartups 10:30:60
+MaxStartups {{ sshd_max_startups }}
+
 #Banner /etc/issue.net
 
 # Allow client to pass locale environment variables
