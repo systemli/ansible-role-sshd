@@ -38,6 +38,7 @@ Defaults:
     sshd_print_motd: "no"
     sshd_print_last_log: "yes"
     sshd_tcp_keep_alive: "yes"
+    sshd_max_startups: "10:30:60"
     sshd_client_alive_interval: 3600
     sshd_client_alive_count_max: 0
     sshd_use_pam: "yes"
