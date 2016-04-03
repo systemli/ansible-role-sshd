@@ -54,6 +54,16 @@ Example Playbook
       roles:
          - { role: 0x46616c6b.sshd }
 
+Testing & Development
+---------------------
+
+For developing and testing the role we use Travis CI and Vagrant. On the local environment you can easily test the role with
+
+```
+vagrant up trusty
+# other available releases are precise, wheezy and jessie
+```
+
 License
 -------
 
