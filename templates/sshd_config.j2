@@ -8,9 +8,9 @@ Port {{ sshd_port }}
 ListenAddress {{ sshd_listen_address }}
 Protocol 2
 # HostKeys for protocol version 2
-HostKey /etc/ssh/ssh_host_rsa_key
-HostKey /etc/ssh/ssh_host_dsa_key
-HostKey /etc/ssh/ssh_host_ecdsa_key
+{% for key in sshd_host_keys %}
+HostKey {{ key }}
+{% endfor %}
 {% if ed25519_key|default(False) and ed25519_key.stat.exists %}
 HostKey /etc/ssh/ssh_host_ed25519_key
 {% endif%}
