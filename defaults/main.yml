@@ -1,4 +1,9 @@
 sshd_port: 22
+
+sshd_host_keys:
+  - "/etc/ssh/ssh_host_rsa_key"
+# To enable backwards compatibility /etc/ssh/ssh_host_ed25519_key is set per default if openssh version > 6.5
+
 sshd_listen_address: 0.0.0.0
 sshd_syslog_facility: AUTH
 sshd_log_level: INFO
