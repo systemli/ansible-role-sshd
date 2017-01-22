@@ -1,7 +1,7 @@
 ansible-sshd
 ============
 
-[![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-sshd-blue.svg)](https://galaxy.ansible.com/list#/roles/3844) [![Build Status](https://travis-ci.org/systemli/ansible-sshd.svg)](https://travis-ci.org/systemli/ansible-sshd)
+[![Build Status](https://travis-ci.org/systemli/ansible-sshd.svg)](https://travis-ci.org/systemli/ansible-sshd) [![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-sshd-blue.svg)](https://galaxy.ansible.com/systemli/sshd/)
 
 Role to install & maintain the OpenSSH Daemon
 
@@ -46,13 +46,20 @@ Defaults:
     sshd_sftp_chroot: "no"
     sshd_sftp_chroot_group: sftponly
 
+Download
+--------
+
+Download latest release with `ansible-galaxy`
+
+	ansible-galaxy install systemli.sshd
+
 
 Example Playbook
 ----------------
 
     - hosts: servers
       roles:
-         - { role: 0x46616c6b.sshd }
+         - { role: systemli.sshd }
 
 Testing & Development
 ---------------------
@@ -68,3 +75,8 @@ License
 -------
 
 GPLv3
+
+Author Information
+------------------
+
+https://www.systemli.org
