@@ -11,6 +11,7 @@ sshd_use_privilege_seperation: "yes"
 sshd_login_grace_time: 120
 sshd_permit_root_login: "no"
 sshd_strict_modes: "yes"
+sshd_pubkey_authentication: "yes"
 sshd_authorized_keys_file: "%h/.ssh/authorized_keys"
 sshd_password_authentication: "no"
 sshd_allow_users: []
