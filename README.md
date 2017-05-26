@@ -14,6 +14,7 @@ Defaults:
 
     sshd_port: 22
     sshd_listen_address: 0.0.0.0
+    sshd_listen_address_ipv6: ::
     sshd_syslog_facility: AUTH
     sshd_log_level: INFO
     sshd_use_privilege_seperation: "yes"

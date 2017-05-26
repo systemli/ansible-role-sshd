@@ -4,8 +4,8 @@
 # What ports, IPs and protocols we listen for
 Port {{ sshd_port }}
 # Use these options to restrict which interfaces/protocols sshd will bind to
-#ListenAddress ::
 ListenAddress {{ sshd_listen_address }}
+ListenAddress {{ sshd_listen_address_ipv6 }}
 Protocol 2
 # HostKeys for protocol version 2
 {% for key in sshd_host_keys %}
