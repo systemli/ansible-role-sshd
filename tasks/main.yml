@@ -9,7 +9,7 @@
 - name: register openssh-server version
   shell: 'dpkg -s openssh-server | grep "^Version" | sed -re "s/^.*:([0-9]+\.[0-9]+).*/\1/"'
   register: openssh_version
-  always_run: true
+  check_mode: no
   changed_when: false
 
 - name: ensure ed25519 host key is present
@@ -24,7 +24,7 @@
   stat:
     path: /etc/ssh/ssh_host_ed25519_key
   register: ed25519_key
-  always_run: true
+  check_mode: no
 
 - name: ensure openssh config is latest
   template:
