@@ -4,7 +4,8 @@ sshd_host_keys:
   - "/etc/ssh/ssh_host_rsa_key"
 # To enable backwards compatibility /etc/ssh/ssh_host_ed25519_key is set per default if openssh version > 6.5
 
-sshd_listen_address: 0.0.0.0
+# Set `sshd_listen_address` to a list of addresses. Defaults to all IPv4+IPv6 addresses if unset.
+#sshd_listen_address: []
 sshd_syslog_facility: AUTH
 sshd_log_level: INFO
 sshd_use_privilege_seperation: "yes"
