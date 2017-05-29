@@ -6,10 +6,8 @@ notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
 
 env:
-  - ANSIBLE_VERSION=1.9.6
-  - ANSIBLE_VERSION=2.0.2.0
-  - ANSIBLE_VERSION=2.1.4.0
   - ANSIBLE_VERSION=2.2.1.0
+  - ANSIBLE_VERSION=2.3.0.0
 
 before_install:
   - sudo apt-get update -qq
