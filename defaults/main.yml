@@ -1,4 +1,6 @@
-sshd_port: 22
+# Set `sshd_port` to a list of ports to listen on.
+sshd_port:
+  - 22
 
 sshd_host_keys:
   - "/etc/ssh/ssh_host_rsa_key"

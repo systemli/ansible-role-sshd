@@ -12,7 +12,9 @@ The playbook requires no special configuration, but offers a bunch of options.
 
 Defaults:
 
-    sshd_port: 22
+    # Set `sshd_port` to a list of ports to listen on.
+    sshd_port:
+      - 22
     # Set `sshd_listen_addresses` to a list of addresses. Defaults to all IPv4+IPv6 addresses if unset.
     #sshd_listen_address: []
     sshd_syslog_facility: AUTH
