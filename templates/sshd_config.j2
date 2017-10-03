@@ -110,3 +110,9 @@ Match Group {{ sshd_sftp_chroot_group }}
         ForceCommand internal-sftp
         AllowTcpForwarding no
 {% endif %}
+
+# Specifies whether to remove an existing Unix-domain socket file for
+# local or remote port forwarding before creating a new one.
+StreamLocalBindUnlink {{ sshd_stream_local_bind_unlink }}
+
+
