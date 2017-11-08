@@ -3,19 +3,21 @@ sshd_port:
   - 22
 
 sshd_host_keys:
-  - "/etc/ssh/ssh_host_rsa_key"
-# To enable backwards compatibility /etc/ssh/ssh_host_ed25519_key is set per default if openssh version > 6.5
+  - rsa
+  - ecdsa
+  - ed25519
 
-# Set `sshd_listen_address` to a list of addresses. Defaults to all IPv4+IPv6 addresses if unset.
+# Set `sshd_listen_address` to a list of addresses. Defaults to all
+# IPv4+IPv6 addresses if unset.
 #sshd_listen_address: []
 sshd_syslog_facility: AUTH
 sshd_log_level: INFO
-sshd_use_privilege_seperation: "yes"
-sshd_login_grace_time: 120
+sshd_use_privilege_seperation: "sandbox"
+sshd_login_grace_time: "2m"
 sshd_permit_root_login: "no"
 sshd_strict_modes: "yes"
 sshd_pubkey_authentication: "yes"
-sshd_authorized_keys_file: "%h/.ssh/authorized_keys"
+sshd_authorized_keys_file: ".ssh/authorized_keys"
 sshd_password_authentication: "no"
 sshd_allow_users: []
 sshd_allow_groups: []
@@ -28,9 +30,9 @@ sshd_x11_display_offset: 10
 sshd_print_motd: "no"
 sshd_print_last_log: "yes"
 sshd_tcp_keep_alive: "yes"
-sshd_max_startups: "10:30:60"
+sshd_max_startups: "10:30:100"
 sshd_client_alive_interval: 3600
-sshd_client_alive_count_max: 0
+sshd_client_alive_count_max: 3
 sshd_use_pam: "yes"
 sshd_use_dns: "no"
 sshd_sftp_chroot: "no"

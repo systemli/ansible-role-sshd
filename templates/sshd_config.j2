@@ -1,93 +1,88 @@
-# Package generated configuration file
-# See the sshd_config(5) manpage for details
+#       $OpenBSD: sshd_config,v 1.100 2016/08/15 12:32:04 naddy Exp $
 
-# What ports, IPs and protocols we listen for
+# This is the sshd server system-wide configuration file.  See
+# sshd_config(5) for more information.
+
+# This sshd was compiled with PATH=/usr/bin:/bin:/usr/sbin:/sbin
+
+# The strategy used for options in the default sshd_config shipped with
+# OpenSSH is to specify options with their default value where
+# possible, but leave them commented.  Uncommented options override the
+# default value.
+
 {% if sshd_port|d() %}
 {%   for port in sshd_port %}
 Port {{ port }}
 {%   endfor %}
+{% else %}
+#Port 22
 {% endif %}
-# Use these options to restrict which interfaces/protocols sshd will bind to
+#AddressFamily any
 {% if sshd_listen_address|d() %}
 {%   for address in sshd_listen_address %}
 ListenAddress {{ address }}
 {%   endfor %}
+{% else %}
+#ListenAddress 0.0.0.0
+#ListenAddress ::
 {% endif %}
-Protocol 2
-# HostKeys for protocol version 2
+
 {% for key in sshd_host_keys %}
-HostKey {{ key }}
+HostKey /etc/ssh/ssh_host_{{ key }}_key
 {% endfor %}
-{% if ed25519_key|default(False) and ed25519_key.stat.exists %}
-HostKey /etc/ssh/ssh_host_ed25519_key
-{% endif%}
-#Privilege Separation is turned on for security
-UsePrivilegeSeparation {{ sshd_use_privilege_seperation }}
+
+# Ciphers and keying
+#RekeyLimit default none
 
 # Logging
 SyslogFacility {{ sshd_syslog_facility }}
 LogLevel {{ sshd_log_level }}
 
 # Authentication:
+
 LoginGraceTime {{ sshd_login_grace_time }}
 PermitRootLogin {{ sshd_permit_root_login }}
 StrictModes {{ sshd_strict_modes }}
+#MaxAuthTries 6
+#MaxSessions 10
 
 PubkeyAuthentication {{ sshd_pubkey_authentication }}
+
+# Expect .ssh/authorized_keys2 to be disregarded by default in future.
 AuthorizedKeysFile {{ sshd_authorized_keys_file }}
 
-{% if sshd_allow_users %}
-AllowUsers {{ sshd_allow_users|join(" ") }}
-{% endif %}
+#AuthorizedPrincipalsFile none
 
-{% if sshd_allow_groups %}
-AllowGroups {{ sshd_allow_groups|join(" ") }}
-{% endif %}
+#AuthorizedKeysCommand none
+#AuthorizedKeysCommandUser nobody
 
+# For this to work you will also need host keys in /etc/ssh/ssh_known_hosts
+HostbasedAuthentication {{ sshd_hostbased_authentication }}
+# Change to yes if you don't trust ~/.ssh/known_hosts for
+# HostbasedAuthentication
+#IgnoreUserKnownHosts no
 # Don't read the user's ~/.rhosts and ~/.shosts files
 IgnoreRhosts {{ sshd_ignore_rhosts }}
 
-# similar for protocol version 2
-HostbasedAuthentication {{ sshd_hostbased_authentication }}
-# Uncomment if you don't trust ~/.ssh/known_hosts for RhostsRSAAuthentication
-#IgnoreUserKnownHosts yes
-
-# To enable empty passwords, change to yes (NOT RECOMMENDED)
+# To disable tunneled clear text passwords, change to no here!
+PasswordAuthentication {{ sshd_password_authentication }}
 PermitEmptyPasswords {{ sshd_permit_empty_passwords }}
 
 # Change to yes to enable challenge-response passwords (beware issues with
 # some PAM modules and threads)
 ChallengeResponseAuthentication {{ sshd_challenge_response_authentication }}
 
-# Change to no to disable tunnelled clear text passwords
-PasswordAuthentication {{ sshd_password_authentication }}
-
 # Kerberos options
 #KerberosAuthentication no
-#KerberosGetAFSToken no
 #KerberosOrLocalPasswd yes
 #KerberosTicketCleanup yes
+#KerberosGetAFSToken no
 
 # GSSAPI options
 #GSSAPIAuthentication no
 #GSSAPICleanupCredentials yes
-
-X11Forwarding {{ sshd_x11_forwarding }}
-X11DisplayOffset {{ sshd_x11_display_offset }}
-PrintMotd {{ sshd_print_motd }}
-PrintLastLog {{ sshd_print_last_log }}
-TCPKeepAlive {{ sshd_tcp_keep_alive }}
-#UseLogin no
-
-MaxStartups {{ sshd_max_startups }}
-
-#Banner /etc/issue.net
-
-# Allow client to pass locale environment variables
-AcceptEnv LANG LC_*
-
-ClientAliveInterval {{ sshd_client_alive_interval }}
-ClientAliveCountMax {{ sshd_client_alive_count_max }}
+#GSSAPIStrictAcceptorCheck yes
+#GSSAPIKeyExchange no
 
 # Set this to 'yes' to enable PAM authentication, account processing,
 # and session processing. If this is enabled, PAM authentication will
@@ -100,9 +95,44 @@ ClientAliveCountMax {{ sshd_client_alive_count_max }}
 # and ChallengeResponseAuthentication to 'no'.
 UsePAM {{ sshd_use_pam }}
 
+#AllowAgentForwarding yes
+#AllowTcpForwarding yes
+#GatewayPorts no
+X11Forwarding {{ sshd_x11_forwarding }}
+X11DisplayOffset {{ sshd_x11_display_offset }}
+#X11UseLocalhost yes
+#PermitTTY yes
+PrintMotd {{ sshd_print_motd }}
+PrintLastLog {{ sshd_print_last_log }}
+TCPKeepAlive {{ sshd_tcp_keep_alive }}
+#UseLogin no
+UsePrivilegeSeparation {{ sshd_use_privilege_seperation }}
+#PermitUserEnvironment no
+#Compression delayed
+ClientAliveInterval {{ sshd_client_alive_interval }}
+ClientAliveCountMax {{ sshd_client_alive_count_max }}
 UseDNS {{ sshd_use_dns }}
+#PidFile /var/run/sshd.pid
+MaxStartups {{ sshd_max_startups }}
+#PermitTunnel no
+#ChrootDirectory none
+#VersionAddendum none
 
-Subsystem sftp internal-sftp
+# no default banner path
+#Banner none
+
+# Allow client to pass locale environment variables
+AcceptEnv LANG LC_*
+
+# override default of no subsystems
+Subsystem       sftp    internal-sftp
+
+# Example of overriding settings on a per-user basis
+#Match User anoncvs
+#       X11Forwarding no
+#       AllowTcpForwarding no
+#       PermitTTY no
+#       ForceCommand cvs server
 
 {% if sshd_sftp_chroot == 'yes' %}
 Match Group {{ sshd_sftp_chroot_group }}
@@ -111,8 +141,14 @@ Match Group {{ sshd_sftp_chroot_group }}
         AllowTcpForwarding no
 {% endif %}
 
+{% if sshd_allow_users|d() %}
+AllowUsers {{ sshd_allow_users|join(" ") }}
+{% endif %}
+
+{% if sshd_allow_groups|d() %}
+AllowGroups {{ sshd_allow_groups|join(" ") }}
+{% endif %}
+
 # Specifies whether to remove an existing Unix-domain socket file for
 # local or remote port forwarding before creating a new one.
 StreamLocalBindUnlink {{ sshd_stream_local_bind_unlink }}
-
-
