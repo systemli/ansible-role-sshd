@@ -6,25 +6,12 @@
     force: yes
   notify: restart sshd
 
-- name: register openssh-server version
-  shell: 'dpkg -s openssh-server | grep "^Version" | sed -re "s/^.*:([0-9]+\.[0-9]+).*/\1/"'
-  register: openssh_version
-  check_mode: no
-  changed_when: false
-
-- name: ensure ed25519 host key is present
-  command: ssh-keygen -q -t ed25519 -N "" -f ssh_host_ed25519_key
+- name: ensure host keys are present
+  command: "ssh-keygen -q -f ssh_host_{{ item }}_key -N '' -t {{ item }}"
   args:
     chdir: /etc/ssh
-    creates: /etc/ssh/ssh_host_ed25519_key
-  when: openssh_version == true and
-        openssh_version.stdout | version_compare('6.5', '>=')
-
-- name: determine if ed25519 host key exists
-  stat:
-    path: /etc/ssh/ssh_host_ed25519_key
-  register: ed25519_key
-  check_mode: no
+    creates: "/etc/ssh/ssh_host_{{ item }}_key"
+  with_items: "{{ sshd_host_keys }}"
 
 - name: ensure openssh config is latest
   template:
