@@ -149,6 +149,8 @@ AllowUsers {{ sshd_allow_users|join(" ") }}
 AllowGroups {{ sshd_allow_groups|join(" ") }}
 {% endif %}
 
+{% if ansible_distribution == 'Debian' or (ansible_distribution == 'Ubuntu' and ansible_distribution_version | version_compare('14.04', '>' )) %}
 # Specifies whether to remove an existing Unix-domain socket file for
 # local or remote port forwarding before creating a new one.
 StreamLocalBindUnlink {{ sshd_stream_local_bind_unlink }}
+{% endif %}
