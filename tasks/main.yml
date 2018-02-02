@@ -1,7 +1,7 @@
 - name: ensure openssh-server is present
   apt:
     pkg: openssh-server
-    state: latest
+    state: present
     install_recommends: no
     force: yes
   notify: restart sshd
