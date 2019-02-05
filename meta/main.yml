@@ -10,12 +10,12 @@ galaxy_info:
     - networking
     - ssh
   platforms:
-  - name: Debian
-    versions:
-      - all
-  - name: Ubuntu
-    versions:
-      - all
+    - name: Debian
+      versions:
+        - all
+    - name: Ubuntu
+      versions:
+        - all
   notifications:
     webhooks: https://galaxy.ansible.com/api/v1/notifications/
 dependencies: []
