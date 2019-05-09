@@ -95,7 +95,7 @@ ChallengeResponseAuthentication {{ sshd_challenge_response_authentication }}
 # and ChallengeResponseAuthentication to 'no'.
 UsePAM {{ sshd_use_pam }}
 
-#AllowAgentForwarding yes
+AllowAgentForwarding {{ sshd_allow_agent_forwarding }}
 #AllowTcpForwarding yes
 #GatewayPorts no
 X11Forwarding {{ sshd_x11_forwarding }}
