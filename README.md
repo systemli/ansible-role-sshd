@@ -52,6 +52,15 @@ Defaults:
     sshd_sftp_chroot: "no"
     sshd_sftp_chroot_group: sftponly
     sshd_allow_agent_forwarding: "no"
+    # manage authorized keys globally and exclusively
+    # when sshd_authorized_keys_file == "/etc/ssh/authorized_keys/%u"
+    # sshd_authorized_keys:
+    #   - user: username
+    #   - key: ssh_rsa ...
+    #   - user: other_username
+    #     key:
+    #       - key1
+    #       - key2
 
 
 Download
