@@ -26,21 +26,5 @@
     name: "{{ sshd_sftp_chroot_group }}"
   when: sshd_sftp_chroot == 'yes'
 
-- name: ensure authorized_keys dir exists
-  file:
-    path: /etc/ssh/authorized_keys
-    state: directory
-    owner: root
-    group: root
-    mode: 0755
-  when: sshd_authorized_keys_file == "/etc/ssh/authorized_keys/%u"
-
-- name: configure authorized keys
-  authorized_key:
-    user: "{{ item.user }}"
-    key: "{{ item.key if item.key is string else '\n'.join(item.key) }}"
-    path: "/etc/ssh/authorized_keys/{{ item.user }}"
-    exclusive: true
-    manage_dir: false
-  loop: "{{ sshd_authorized_keys | flatten(levels=1) }}"
+- import_tasks: authorized_keys.yml
   when: sshd_authorized_keys_file == "/etc/ssh/authorized_keys/%u"
