@@ -80,7 +80,7 @@ Example Playbook
 Testing & Development
 ---------------------
 
-Molecule, Docker and Travis CI are used for continous testing.
+Molecule, Goss, Docker, and Travis CI are used for continous testing.
 You can easily test the role locally with
 
     molecule test
