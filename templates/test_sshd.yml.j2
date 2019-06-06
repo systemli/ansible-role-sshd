@@ -16,8 +16,9 @@ file:
 {% for item in sshd_authorized_keys %}
   /etc/ssh/authorized_keys/{{ item.user }}:
     exists: true
+    mode: "0640"
     owner: root
-    group: root
+    group: {{ item.user }}
 {% endfor %}
 {% endif %}
 {% for item in sshd_host_keys %}

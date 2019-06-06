@@ -31,6 +31,15 @@
   when: item.key is defined
   loop: "{{ sshd_authorized_keys | flatten(levels=1) }}"
 
+- name: configure authorized keys permissions
+  file:
+    path: "/etc/ssh/authorized_keys/{{ item.user }}"
+    owner: root
+    group: "{{ item.user }}"
+    mode:  0640
+  when: item.key is defined
+  loop: "{{ sshd_authorized_keys | flatten(levels=1) }}"
+
 - name: link authorized keys file
   file:
     src: "{{ item.src }}"
