@@ -1,0 +1,21 @@
+---
+file:
+  /etc/ssh:
+    exists: true
+    mode: "0755"
+    owner: root
+    group: root
+    filetype: directory
+service:
+  ssh:
+    enabled: true
+    running: true
+  sshd:
+    enabled: true
+    running: true
+group:
+  ssh:
+    exists: true
+process:
+  sshd:
+    running: true
