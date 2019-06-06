@@ -6,18 +6,26 @@ file:
     owner: root
     group: root
     filetype: directory
-  /etc/ssh/ssh_host_rsa_key:
+{% if sshd_authorized_keys_file == "/etc/ssh/authorized_keys/%u" %}
+  /etc/ssh/authorized_keys:
+    exists: true
+    mode: "0755"
+    owner: root
+    group: root
+    filetype: directory
+{% for item in sshd_authorized_keys %}
+  /etc/ssh/authorized_keys/{{ item.user }}:
     exists: true
     owner: root
     group: root
-  /etc/ssh/ssh_host_ecdsa_key:
+{% endfor %}
+{% endif %}
+{% for item in sshd_host_keys %}
+  /etc/ssh/ssh_host_{{ item }}_key:
     exists: true
     owner: root
     group: root
-  /etc/ssh/ssh_host_ed25519_key:
-    exists: true
-    owner: root
-    group: root
+{% endfor %}
 service:
   ssh:
     enabled: true

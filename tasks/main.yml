@@ -28,3 +28,7 @@
 
 - import_tasks: authorized_keys.yml
   when: sshd_authorized_keys_file == "/etc/ssh/authorized_keys/%u"
+
+- import_tasks: goss.yml
+  tags:
+    - goss
