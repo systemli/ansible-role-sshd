@@ -56,11 +56,13 @@ Defaults:
     # when sshd_authorized_keys_file == "/etc/ssh/authorized_keys/%u"
     # sshd_authorized_keys:
     #   - user: username
-    #   - key: ssh_rsa ...
+    #     key: ssh_rsa ...
     #   - user: other_username
     #     key:
     #       - key1
     #       - key2
+    #   - user: git
+    #     src: /var/opt/gitlab/.ssh/authorized_keys
 
 
 Download
