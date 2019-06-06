@@ -28,4 +28,13 @@
     path: "/etc/ssh/authorized_keys/{{ item.user }}"
     exclusive: true
     manage_dir: false
+  when: item.key is defined
+  loop: "{{ sshd_authorized_keys | flatten(levels=1) }}"
+
+- name: link authorized keys file
+  file:
+    src: "{{ item.src }}"
+    dest: "/etc/ssh/authorized_keys/{{ item.user }}"
+    state: link
+  when: item.key is not defined and item.src is defined
   loop: "{{ sshd_authorized_keys | flatten(levels=1) }}"
