@@ -129,10 +129,10 @@ Subsystem       sftp    internal-sftp
 
 # Example of overriding settings on a per-user basis
 #Match User anoncvs
-#       X11Forwarding no
-#       AllowTcpForwarding no
-#       PermitTTY no
-#       ForceCommand cvs server
+#	X11Forwarding no
+#	AllowTcpForwarding no
+#	PermitTTY no
+#	ForceCommand cvs server
 
 {% if sshd_sftp_chroot == 'yes' %}
 Match Group {{ sshd_sftp_chroot_group }}
