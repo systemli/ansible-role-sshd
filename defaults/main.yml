@@ -14,7 +14,6 @@ sshd_host_keys:
 # sshd_listen_address: []
 sshd_syslog_facility: AUTH
 sshd_log_level: INFO
-sshd_use_privilege_seperation: "sandbox"
 sshd_login_grace_time: "2m"
 sshd_permit_root_login: "no"
 sshd_strict_modes: "yes"
