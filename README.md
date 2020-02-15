@@ -26,7 +26,6 @@ Defaults:
     #sshd_listen_address: []
     sshd_syslog_facility: AUTH
     sshd_log_level: INFO
-    sshd_use_privilege_seperation: "yes"
     sshd_login_grace_time: 120
     sshd_permit_root_login: "no"
     sshd_strict_modes: "yes"

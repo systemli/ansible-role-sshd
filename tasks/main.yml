@@ -26,6 +26,20 @@
     name: "{{ sshd_sftp_chroot_group }}"
   when: sshd_sftp_chroot == 'yes'
 
+- name: ensure /run/sshd exists (for containers)
+  file:
+    path: /run/sshd
+    state: directory
+    mode: '0755'
+    owner: root
+    group: root
+
+- name: check sshd config
+  command: /usr/sbin/sshd -t
+  register: __sshd_check_config
+  changed_when: False
+  failed_when: __sshd_check_config.stderr
+
 - import_tasks: authorized_keys.yml
   when: sshd_authorized_keys_file == "/etc/ssh/authorized_keys/%u"
 

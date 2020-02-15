@@ -12,7 +12,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.synced_folder "../", "/etc/ansible/roles/role_under_test", type: 'rsync'
 
-  ["jessie", "stretch"].each do |release|
+  ["buster", "stretch"].each do |release|
     config.vm.define "#{release}" do |node|
       node.vm.hostname = "#{release}"
       node.vm.box = "debian/#{release}64"
