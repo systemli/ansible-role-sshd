@@ -8,10 +8,12 @@ platforms:
     box: debian/stretch64
   - name: buster64
     box: debian/buster64
+lint: |
+  set -e
+  yamllint .
+  ansible-lint
 provisioner:
   name: ansible
   become: true
 verifier:
   name: goss
-  lint:
-    name: yamllint
