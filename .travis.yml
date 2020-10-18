@@ -10,7 +10,7 @@ env:
 
 install:
   # Install test dependencies.
-  - pip install ansible-lint molecule-goss docker yamllint
+  - pip install ansible-lint molecule[docker] molecule-goss yamllint
 
 script:
   - molecule test -s docker
