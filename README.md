@@ -1,7 +1,7 @@
 ansible-sshd
 ============
 
-[![Build Status](https://travis-ci.com/systemli/ansible-role-sshd.svg?branch=master)](https://travis-ci.com/systemli/ansible-role-sshd)
+[![Build Status](https://github.com/systemli/ansible-role-sshd/workflows/Molecule/badge.svg?branch=master)](https://github.com/systemli/ansible-role-sshd/actions?query=workflow%3AMolecule)
 [![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-sshd-blue.svg)](https://galaxy.ansible.com/systemli/sshd/)
 
 Role to install & maintain the OpenSSH Daemon. Supports centralized authorized key management.
@@ -82,7 +82,7 @@ Example Playbook
 Testing & Development
 ---------------------
 
-Molecule, Goss, Docker, and Travis CI are used for continous testing.
+Molecule, Goss, Docker, and Github Actions are used for continous testing.
 You can easily test the role locally with
 
     molecule test
