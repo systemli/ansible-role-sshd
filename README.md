@@ -1,7 +1,8 @@
 ansible-sshd
 ============
 
-[![Build Status](https://travis-ci.org/systemli/ansible-role-sshd.svg?branch=master)](https://travis-ci.org/systemli/ansible-role-sshd) [![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-sshd-blue.svg)](https://galaxy.ansible.com/systemli/sshd/)
+[![Build Status](https://travis-ci.com/systemli/ansible-role-sshd.svg?branch=master)](https://travis-ci.com/systemli/ansible-role-sshd)
+[![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-sshd-blue.svg)](https://galaxy.ansible.com/systemli/sshd/)
 
 Role to install & maintain the OpenSSH Daemon. Supports centralized authorized key management.
 
