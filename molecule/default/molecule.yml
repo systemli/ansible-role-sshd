@@ -11,7 +11,7 @@ platforms:
 lint: |
   set -e
   yamllint .
-  ansible-lint
+  ansible-lint --exclude molecule/default/tests
 provisioner:
   name: ansible
   become: true

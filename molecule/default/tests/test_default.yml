@@ -6,18 +6,12 @@ file:
     owner: root
     group: root
     filetype: directory
-  /etc/ssh/ssh_host_rsa_key:
+{{range .Vars.sshd_host_keys}}
+  /etc/ssh/ssh_host_{{.}}_key:
     exists: true
     owner: root
     group: root
-  /etc/ssh/ssh_host_ecdsa_key:
-    exists: true
-    owner: root
-    group: root
-  /etc/ssh/ssh_host_ed25519_key:
-    exists: true
-    owner: root
-    group: root
+{{end}}
 service:
   ssh:
     enabled: true
