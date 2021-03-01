@@ -1,6 +1,7 @@
 ---
 galaxy_info:
-  author: louis
+  role_name: sshd
+  author: systemli
   description: Role to maintain and configure the SSH daemon
   company: systemli.org
   license: GPLv3
