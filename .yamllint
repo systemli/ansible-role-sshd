@@ -2,8 +2,6 @@
 # Based on ansible-lint config
 extends: default
 
-ignore: molecule/default/tests
-
 rules:
   braces:
     max-spaces-inside: 1
