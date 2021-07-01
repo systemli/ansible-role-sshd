@@ -6,6 +6,7 @@
     state: present
     install_recommends: no
     force: yes
+    cache_valid_time: 3600
   notify: restart sshd
 
 - name: ensure host keys are present
