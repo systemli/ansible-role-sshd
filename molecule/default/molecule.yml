@@ -4,10 +4,10 @@ driver:
   provider:
     name: virtualbox
 platforms:
-  - name: stretch64
-    box: debian/stretch64
   - name: buster64
     box: debian/buster64
+  - name: bullseye64
+    box: debian/bullseye64
 lint: |
   set -e
   yamllint .
