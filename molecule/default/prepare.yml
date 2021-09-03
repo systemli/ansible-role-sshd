@@ -2,8 +2,15 @@
 - name: Prepare
   hosts: all
   gather_facts: false
+  vars:
+    ansible_python_interpreter: "/usr/bin/python3"
   tasks:
     - name: Install python for Ansible
-      raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
+      raw: test -e /usr/bin/python || (apt -y update && apt install -y python3-minimal)
+      become: true
+      changed_when: false
+
+    - name: Run apt update to allow releaseinfo change (else ansible fails)
+      raw: apt-get --allow-releaseinfo-change update
       become: true
       changed_when: false
