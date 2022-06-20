@@ -1,10 +1,11 @@
 ---
 name: Integration
+
 on:
-  pull_request:
   push:
     branches:
       - main
+  pull_request:
   schedule:
     # * is a special character in YAML so you have to quote this string
     # first of each month
@@ -13,8 +14,6 @@ on:
 jobs:
   integration:
     name: Integration
-    uses: systemli/github-ansible-workflow/.github/workflows/ansible-integration-workflow.yaml@main
-    with:
-      distros: '[ "debian11", "debian10", "debian9" ]'
+    uses: ./.github/workflows/workflow_integration.yml
     secrets:
       galaxy-token: ${{ secrets.galaxy_api_key }}

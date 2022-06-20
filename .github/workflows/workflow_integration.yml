@@ -1,0 +1,100 @@
+---
+name: Integration
+
+on:
+  workflow_call:
+    inputs:
+      distros:
+        required: false
+        description: 'List of distributions to test against the Role'
+        type: string
+        default: '[ "debian11", "debian10", "ubuntu2004", "ubuntu1804" ]'
+      default-branch:
+        required: false
+        description: 'Default branch of the repository. Default: main'
+        type: string
+        default: 'main'
+      dependencies:
+        required: false
+        description: 'Default pip dependencies for molecule'
+        type: string
+        default: |
+          molecule[docker]==3.6.1
+          molecule-goss
+      molecule-config:
+        required: false
+        description: ''
+        type: string
+        default: |
+          ---
+          driver:
+            name: docker
+          platforms:
+            - name: instance
+              image: "geerlingguy/docker-\$\{MOLECULE_DISTRO:-debian10\}-ansible:latest"
+              command: ${MOLECULE_DOCKER_COMMAND:-""}
+              volumes:
+                - /sys/fs/cgroup:/sys/fs/cgroup:ro
+              privileged: true
+              pre_build_image: true
+          provisioner:
+            name: ansible
+            playbooks:
+              converge: ../default/converge.yml
+    secrets:
+      galaxy-token:
+        required: true
+        description: 'Token to upload the Role to Ansible Galaxy'
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Ansible Lint
+        uses: ansible-community/ansible-lint-action@v6
+
+      - name: YAMLLint
+        uses: ibiqlik/action-yamllint@v3
+
+  test:
+    name: Molecule
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        distro: ${{ fromJSON(inputs.distros) }}
+      fail-fast: false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Prepare Molecule Tests
+        run: |
+          # Creating required directories
+          mkdir -p molecule/github
+          # Writing required packages to requirements.txt (to cached)
+          echo "${{ inputs.dependencies }}" > molecule/requirements.txt
+          # Writing molecule config for docker
+          echo "${{ inputs.molecule-config}}" > molecule/github/molecule.yml
+      - name: Setup Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.x'
+          cache: 'pip'
+          cache-dependency-path: 'molecule/requirements.txt'
+
+      - name: Install Dependencies
+        run: pip3 install -r molecule/requirements.txt
+
+      - name: Molecule Test
+        run: |
+          cat molecule/github/molecule.yml
+          echo $MOLECULE_DISTRO
+          molecule test -s github
+        env:
+          PY_COLORS: '1'
+          ANSIBLE_FORCE_COLOR: '1'
+          MOLECULE_DISTRO: ${{ matrix.distro }}
