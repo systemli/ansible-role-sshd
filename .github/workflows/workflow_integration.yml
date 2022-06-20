@@ -86,6 +86,17 @@ jobs:
           cache: 'pip'
           cache-dependency-path: 'molecule/requirements.txt'
 
+      - name: Print Debug information
+        run: | 
+          echo "Print molecule/requirements.txt"
+          cat molecule/requirements.txt
+          echo "Print molecule/github/molecule.yml"
+          cat molecule/github/molecule.yml
+          echo "Print molecule/default/converge.yml"
+          cat molecule/default/converge.yml
+          if [ -f "molecule/default/prepare.yml" ]; then echo "Print molecule/default/prepare.yml" && cat molecule/default/prepare.yml; fi
+          if [ -f "molecule/default/verify.yml" ]; then echo "Print molecule/default/verify.yml" && cat molecule/default/verify.yml; fi
+
       - name: Install Dependencies
         run: pip3 install -r molecule/requirements.txt
 
