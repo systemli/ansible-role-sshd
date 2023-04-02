@@ -44,9 +44,11 @@
   changed_when: False
   failed_when: __sshd_check_config.stderr
 
-- import_tasks: authorized_keys.yml
+- name: Import tasks to manage authorized keys
+  import_tasks: authorized_keys.yml
   when: sshd_authorized_keys_file == "/etc/ssh/authorized_keys/%u"
 
-- import_tasks: goss.yml
+- name: Import goss tasks
+  import_tasks: goss.yml
   tags:
     - goss
