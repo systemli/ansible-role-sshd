@@ -39,11 +39,6 @@
       changed_when: false
       become: false
 
-    - name: debug
-      debug:
-        msg: "{{ test_files.files }}"
-        verbosity: 3
-
     - name: Copy defaults vars to goss vars
       copy:
         src: "{{ lookup('env', 'MOLECULE_PROJECT_DIRECTORY') }}/defaults/main.yml"

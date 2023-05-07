@@ -5,7 +5,7 @@ galaxy_info:
   description: Role to maintain and configure the SSH daemon
   company: systemli.org
   license: GPLv3
-  min_ansible_version: 2.5
+  min_ansible_version: "2.5"
   galaxy_tags:
     - system
     - networking
@@ -17,6 +17,4 @@ galaxy_info:
     - name: Ubuntu
       versions:
         - all
-  notifications:
-    webhooks: https://galaxy.ansible.com/api/v1/notifications/
 dependencies: []

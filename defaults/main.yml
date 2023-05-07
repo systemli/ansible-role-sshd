@@ -52,4 +52,4 @@ sshd_allow_agent_forwarding: "no"
 #   - user: git
 #     src: /var/opt/gitlab/.ssh/authorized_keys
 
-sshd_header: "{{ lookup('vars', 'sshd_header_'+ansible_distribution_release, default=sshd_header_buster) }}"
+sshd_header: "{{ lookup('vars', 'sshd_header_' + ansible_distribution_release, default=sshd_header_buster) }}"

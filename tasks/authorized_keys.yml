@@ -1,6 +1,6 @@
 ---
 
-- name: ensure authorized_keys dir exists
+- name: Ensure authorized_keys dir exists
   file:
     path: /etc/ssh/authorized_keys
     state: directory
@@ -8,20 +8,20 @@
     group: root
     mode: 0755
 
-- name: get current authorized keys
+- name: Get current authorized keys
   command: ls -1 /etc/ssh/authorized_keys
   register: sshd_old_users
   check_mode: false
   changed_when: false
 
-- name: delete unmaintained authorized keys
+- name: Delete unmaintained authorized keys
   file:
     path: "/etc/ssh/authorized_keys/{{ item }}"
     state: absent
   when: "item not in sshd_authorized_keys|map(attribute='user')|list"
   loop: "{{ sshd_old_users.stdout_lines }}"
 
-- name: configure authorized keys
+- name: Configure authorized keys
   ansible.posix.authorized_key:
     user: "{{ item.user }}"
     key: "{{ item.key if item.key is string else '\n'.join(item.key) }}"
@@ -31,7 +31,7 @@
   when: item.key is defined
   loop: "{{ sshd_authorized_keys | flatten(levels=1) }}"
 
-- name: configure authorized keys permissions
+- name: Configure authorized keys permissions
   file:
     path: "/etc/ssh/authorized_keys/{{ item.user }}"
     owner: root
@@ -40,7 +40,7 @@
   when: item.key is defined
   loop: "{{ sshd_authorized_keys | flatten(levels=1) }}"
 
-- name: link authorized keys file
+- name: Link authorized keys file
   file:
     src: "{{ item.src }}"
     dest: "/etc/ssh/authorized_keys/{{ item.user }}"

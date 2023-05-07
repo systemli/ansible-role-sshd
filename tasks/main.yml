@@ -1,36 +1,36 @@
 ---
 
-- name: ensure openssh-server is present
+- name: Ensure openssh-server is present
   apt:
     pkg: openssh-server
     state: present
     install_recommends: no
     force: yes
     cache_valid_time: 3600
-  notify: restart sshd
+  notify: Restart sshd
 
-- name: ensure host keys are present
+- name: Ensure host keys are present
   command: "ssh-keygen -q -f ssh_host_{{ item }}_key -N '' -t {{ item }}"
   args:
     chdir: /etc/ssh
     creates: "/etc/ssh/ssh_host_{{ item }}_key"
   with_items: "{{ sshd_host_keys }}"
 
-- name: ensure openssh config is latest
+- name: Ensure openssh config is latest
   template:
     src: sshd_config.j2
     dest: /etc/ssh/sshd_config
     owner: root
     group: root
     mode: 0644
-  notify: restart sshd
+  notify: Restart sshd
 
-- name: ensure sftp chroot group is present
+- name: Ensure sftp chroot group is present
   group:
     name: "{{ sshd_sftp_chroot_group }}"
   when: sshd_sftp_chroot == 'yes'
 
-- name: ensure /run/sshd exists (for containers)
+- name: Ensure /run/sshd exists (for containers)
   file:
     path: /run/sshd
     state: directory
@@ -38,7 +38,7 @@
     owner: root
     group: root
 
-- name: check sshd config
+- name: Check sshd config
   command: /usr/sbin/sshd -t
   register: __sshd_check_config
   changed_when: False
