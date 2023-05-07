@@ -82,7 +82,7 @@ Example Playbook
 Testing & Development
 ---------------------
 
-Molecule, Goss, Docker, and Github Actions are used for continous testing.
+Molecule, Docker, and Github Actions are used for continous testing.
 You can easily test the role locally with
 
     molecule test
