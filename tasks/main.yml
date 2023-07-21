@@ -1,5 +1,4 @@
 ---
-
 - name: Ensure openssh-server is present
   apt:
     pkg: openssh-server
