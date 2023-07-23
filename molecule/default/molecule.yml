@@ -1,19 +1,13 @@
 ---
 driver:
   name: vagrant
-  provider:
-    name: virtualbox
 platforms:
-  - name: buster64
-    box: debian/buster64
-  - name: bullseye64
+  - name: debian12
+    box: debian/bookworm64
+  - name: debian11
     box: debian/bullseye64
-lint: |
-  set -e
-  yamllint .
-  ansible-lint --exclude molecule/default/tests
 provisioner:
   name: ansible
+  ansible_args:
+    - --diff
   become: true
-verifier:
-  name: goss

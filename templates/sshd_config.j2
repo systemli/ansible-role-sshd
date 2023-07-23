@@ -1,5 +1,4 @@
-#	{{ sshd_header }}
-
+{{ ansible_managed | comment }}
 # This is the sshd server system-wide configuration file.  See
 # sshd_config(5) for more information.
 
@@ -10,7 +9,7 @@
 # possible, but leave them commented.  Uncommented options override the
 # default value.
 
-{% if ansible_distribution_release == "bullseye" %}
+{% if ansible_distribution_version | int >= 11 and ansible_distribution == 'Debian' %}
 Include /etc/ssh/sshd_config.d/*.conf
 
 {% endif %}
@@ -74,7 +73,11 @@ PermitEmptyPasswords {{ sshd_permit_empty_passwords }}
 
 # Change to yes to enable challenge-response passwords (beware issues with
 # some PAM modules and threads)
+{% if ansible_distribution_version | int >= 12 and ansible_distribution == 'Debian' %}
+KbdInteractiveAuthentication {{ sshd_kbd_interactive_authentication }}
+{% else %}
 ChallengeResponseAuthentication {{ sshd_challenge_response_authentication }}
+{% endif %}
 
 # Kerberos options
 #KerberosAuthentication no
@@ -151,8 +154,6 @@ AllowUsers {{ sshd_allow_users|join(" ") }}
 AllowGroups {{ sshd_allow_groups|join(" ") }}
 {% endif %}
 
-{% if ansible_distribution == 'Debian' or (ansible_distribution == 'Ubuntu' and ansible_distribution_version is version('14.04', '>' )) %}
 # Specifies whether to remove an existing Unix-domain socket file for
 # local or remote port forwarding before creating a new one.
 StreamLocalBindUnlink {{ sshd_stream_local_bind_unlink }}
-{% endif %}
