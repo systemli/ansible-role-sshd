@@ -40,7 +40,11 @@ service:
     enabled: true
     running: true
 group:
+{% if ansible_distribution_version | int >= 12 and ansible_distribution == 'Debian' %}
+  _ssh:
+{% else %}
   ssh:
+{% endif %}
     exists: true
 process:
   sshd:
