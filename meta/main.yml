@@ -14,10 +14,9 @@ galaxy_info:
     - name: Debian
       versions:
         - bookworm
-        - bullyeye
+        - bullseye
     - name: Ubuntu
       versions:
-        - kinetic
         - jammy
         - focal
 dependencies: []
