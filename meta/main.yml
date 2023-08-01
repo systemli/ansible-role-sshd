@@ -13,8 +13,11 @@ galaxy_info:
   platforms:
     - name: Debian
       versions:
-        - all
+        - bookworm
+        - bullyeye
     - name: Ubuntu
       versions:
-        - all
+        - kinetic
+        - jammy
+        - focal
 dependencies: []
