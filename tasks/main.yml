@@ -8,6 +8,12 @@
     cache_valid_time: 3600
   notify: Restart sshd
 
+- name: Ensure openssh-server daemon is enabled
+  ansible.builtin.service:
+    name: ssh
+    enabled: true
+    state: started
+
 - name: Ensure host keys are present
   command: "ssh-keygen -q -f ssh_host_{{ item }}_key -N '' -t {{ item }}"
   args:
