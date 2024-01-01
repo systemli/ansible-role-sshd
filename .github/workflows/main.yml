@@ -10,7 +10,6 @@ on:
       - ".*"
       - ".github/**"
       - "README.md"
-  workflow_dispatch:
 
 jobs:
   integration:
