@@ -141,7 +141,7 @@ Subsystem       sftp    internal-sftp
 
 {% if sshd_sftp_chroot == 'yes' %}
 Match Group {{ sshd_sftp_chroot_group }}
-        ChrootDirectory %h
+        ChrootDirectory {{ sshd_sftp_chroot_directory }}
         ForceCommand internal-sftp
         AllowTcpForwarding no
 {% endif %}
