@@ -30,7 +30,7 @@ sshd_kbd_interactive_authentication: "no"
 sshd_x11_forwarding: "no"
 sshd_x11_display_offset: 10
 sshd_print_motd: "no"
-sshd_print_last_log: "yes"
+sshd_print_last_log: "no"
 sshd_tcp_keep_alive: "yes"
 sshd_max_startups: "10:30:100"
 sshd_client_alive_interval: 3600
