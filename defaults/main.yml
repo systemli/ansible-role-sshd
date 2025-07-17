@@ -1,5 +1,4 @@
 ---
-
 # Set `sshd_port` to a list of ports to listen on.
 sshd_port:
   - 22
@@ -9,9 +8,7 @@ sshd_host_keys:
   - ecdsa
   - ed25519
 
-# Set `sshd_listen_address` to a list of addresses. Defaults to all
-# IPv4+IPv6 addresses if unset.
-# sshd_listen_address: []
+sshd_listen_address: []
 sshd_syslog_facility: AUTH
 sshd_log_level: INFO
 sshd_login_grace_time: "2m"
