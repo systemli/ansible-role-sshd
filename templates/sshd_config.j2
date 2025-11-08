@@ -1,18 +1,16 @@
 {{ ansible_managed | comment }}
-# This is the sshd server system-wide configuration file. See
+# This is the sshd server system-wide configuration file.  See
 # sshd_config(5) for more information.
 
 # This sshd was compiled with PATH=/usr/local/bin:/usr/bin:/bin:/usr/games
 
 # The strategy used for options in the default sshd_config shipped with
 # OpenSSH is to specify options with their default value where
-# possible, but leave them commented. Uncommented options override the
+# possible, but leave them commented.  Uncommented options override the
 # default value.
 
-{% if ansible_distribution_version | int >= 11 and ansible_distribution == 'Debian' %}
 Include /etc/ssh/sshd_config.d/*.conf
 
-{% endif %}
 {% if (sshd_port | length) > 0 %}
 {% for port in sshd_port | sort %}
 Port {{ port }}
@@ -67,17 +65,15 @@ HostbasedAuthentication {{ sshd_hostbased_authentication }}
 # Don't read the user's ~/.rhosts and ~/.shosts files
 IgnoreRhosts {{ sshd_ignore_rhosts }}
 
-# To disable tunneled clear text passwords, change to no here!
+# To disable tunneled clear text passwords, change to "no" here!
 PasswordAuthentication {{ sshd_password_authentication }}
 PermitEmptyPasswords {{ sshd_permit_empty_passwords }}
 
-# Change to yes to enable challenge-response passwords (beware issues with
-# some PAM modules and threads)
-{% if ansible_distribution_version | int >= 12 and ansible_distribution == 'Debian' %}
+# Change to "yes" to enable keyboard-interactive authentication.  Depending on
+# the system's configuration, this may involve passwords, challenge-response,
+# one-time passwords or some combination of these and other methods.
+# Beware issues with some PAM modules and threads.
 KbdInteractiveAuthentication {{ sshd_kbd_interactive_authentication }}
-{% else %}
-ChallengeResponseAuthentication {{ sshd_challenge_response_authentication }}
-{% endif %}
 
 # Kerberos options
 #KerberosAuthentication no
@@ -94,7 +90,7 @@ ChallengeResponseAuthentication {{ sshd_challenge_response_authentication }}
 # Set this to 'yes' to enable PAM authentication, account processing,
 # and session processing. If this is enabled, PAM authentication will
 # be allowed through the KbdInteractiveAuthentication and
-# PasswordAuthentication. Depending on your PAM configuration,
+# PasswordAuthentication.  Depending on your PAM configuration,
 # PAM authentication via KbdInteractiveAuthentication may bypass
 # the setting of "PermitRootLogin prohibit-password".
 # If you just want the PAM account and session checks to run without
@@ -126,8 +122,8 @@ MaxStartups {{ sshd_max_startups }}
 # no default banner path
 #Banner none
 
-# Allow client to pass locale environment variables
-AcceptEnv LANG LC_*
+# Allow client to pass locale and color environment variables
+AcceptEnv LANG LC_* COLORTERM NO_COLOR
 
 # override default of no subsystems
 Subsystem sftp internal-sftp

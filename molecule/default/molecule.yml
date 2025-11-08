@@ -2,10 +2,10 @@
 driver:
   name: vagrant
 platforms:
+  - name: debian13
+    box: debian/trixie64
   - name: debian12
     box: debian/bookworm64
-  - name: debian11
-    box: debian/bullseye64
 provisioner:
   name: ansible
   ansible_args:
