@@ -122,8 +122,8 @@ MaxStartups {{ sshd_max_startups }}
 # no default banner path
 #Banner none
 
-# Allow client to pass locale and color environment variables
-AcceptEnv LANG LC_* COLORTERM NO_COLOR
+# Allow client to pass environment variables
+AcceptEnv {{ sshd_accept_env }}
 
 # override default of no subsystems
 Subsystem sftp internal-sftp

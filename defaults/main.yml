@@ -17,6 +17,7 @@ sshd_strict_modes: "yes"
 sshd_pubkey_authentication: "yes"
 sshd_authorized_keys_file: ".ssh/authorized_keys"
 sshd_password_authentication: "no"
+sshd_accept_env: "LANG LC_* COLORTERM NO_COLOR"
 sshd_allow_users: []
 sshd_allow_groups: []
 sshd_ignore_rhosts: "yes"
