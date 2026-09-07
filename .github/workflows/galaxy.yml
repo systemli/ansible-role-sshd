@@ -1,18 +1,17 @@
 ---
-  name: Ansible Galaxy
+name: Ansible Galaxy
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - "*"
 
-  on:
-    push:
-      branches:
-        - main
-      tags:
-        - "*"
-
-  jobs:
-    galaxy:
-      name: Ansible Galaxy
-      uses: systemli/github-ansible-workflow/.github/workflows/ansible-galaxy-workflow.yaml@v1.6.0
-      with:
-        git-branch: ${{ github.ref_name }}
-      secrets:
-        galaxy-token: ${{ secrets.galaxy_api_key }}
+jobs:
+  galaxy:
+    name: Ansible Galaxy
+    uses: systemli/github-ansible-workflow/.github/workflows/ansible-galaxy-workflow.yaml@main
+    with:
+      git-branch: ${{ github.ref_name }}
+    secrets:
+      galaxy-token: ${{ secrets.galaxy_api_key }}

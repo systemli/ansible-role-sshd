@@ -1,6 +1,5 @@
 ---
 name: Integration
-
 on:
   pull_request:
   push:
@@ -14,6 +13,6 @@ on:
 jobs:
   integration:
     name: Integration
-    uses: systemli/github-ansible-workflow/.github/workflows/ansible-integration-workflow.yaml@v1.6.0
+    uses: systemli/github-ansible-workflow/.github/workflows/ansible-integration-workflow.yaml@v1.6.2
     with:
-      distros: '[ "debian13", "debian12", "ubuntu2204", "ubuntu2404" ]'
+      distros: '[ "debian13", "debian12" ]'
