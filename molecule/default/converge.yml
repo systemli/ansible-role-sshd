@@ -3,4 +3,4 @@
   hosts: all
   become: True
   roles:
-    - role: ansible-role-sshd
+    - systemli.sshd
