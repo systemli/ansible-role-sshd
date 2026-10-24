@@ -1,10 +1,10 @@
 ---
 - name: Ensure openssh-server is present
-  apt:
+  ansible.builtin.apt:
     pkg: openssh-server
     state: present
-    install_recommends: no
-    force: yes
+    install_recommends: false
+    force: true
     cache_valid_time: 3600
   notify: Restart sshd
 
@@ -15,45 +15,45 @@
     state: started
 
 - name: Ensure host keys are present
-  command: "ssh-keygen -q -f ssh_host_{{ item }}_key -N '' -t {{ item }}"
+  ansible.builtin.command: "ssh-keygen -q -f ssh_host_{{ item }}_key -N '' -t {{ item }}"
   args:
     chdir: /etc/ssh
     creates: "/etc/ssh/ssh_host_{{ item }}_key"
   with_items: "{{ sshd_host_keys }}"
 
 - name: Ensure openssh config is latest
-  template:
+  ansible.builtin.template:
     src: sshd_config.j2
     dest: /etc/ssh/sshd_config
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   notify: Restart sshd
 
 - name: Ensure sftp chroot group is present
-  group:
+  ansible.builtin.group:
     name: "{{ sshd_sftp_chroot_group }}"
   when: sshd_sftp_chroot == 'yes'
 
 - name: Ensure /run/sshd exists (for containers)
-  file:
+  ansible.builtin.file:
     path: /run/sshd
     state: directory
-    mode: '0755'
+    mode: "0755"
     owner: root
     group: root
 
 - name: Check sshd config
-  command: /usr/sbin/sshd -t
+  ansible.builtin.command: /usr/sbin/sshd -t
   register: __sshd_check_config
-  changed_when: False
+  changed_when: false
   failed_when: __sshd_check_config.stderr != ""
 
 - name: Import tasks to manage authorized keys
-  import_tasks: authorized_keys.yml
+  ansible.builtin.import_tasks: authorized_keys.yml
   when: sshd_authorized_keys_file == "/etc/ssh/authorized_keys/%u"
 
 - name: Import goss tasks
-  import_tasks: goss.yml
+  ansible.builtin.import_tasks: goss.yml
   tags:
     - goss
