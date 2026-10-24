@@ -1,0 +1,108 @@
+---
+argument_specs:
+  main:
+    short_description: Install and maintain the OpenSSH daemon
+    description:
+      - Installs and configures the OpenSSH daemon. Supports centralized, exclusive authorized key management.
+      - Most sshd options are strings (for example C("yes") and C("no")) because they are written verbatim into C(sshd_config).
+    options:
+      sshd_port:
+        type: list
+        elements: int
+        description:
+          - List of ports to listen on.
+      sshd_host_keys:
+        type: list
+        elements: str
+        description:
+          - Host key types (for example C(rsa), C(ecdsa), C(ed25519)).
+      sshd_listen_address:
+        type: list
+        elements: str
+        description:
+          - List of addresses to listen on. If empty, all IPv4 and IPv6 addresses are used.
+      sshd_syslog_facility:
+        type: str
+      sshd_log_level:
+        type: str
+      sshd_login_grace_time:
+        type: str
+      sshd_permit_root_login:
+        type: str
+      sshd_strict_modes:
+        type: str
+      sshd_pubkey_authentication:
+        type: str
+      sshd_authorized_keys_file:
+        type: str
+        description:
+          - Value of C(AuthorizedKeysFile). Set to C(/etc/ssh/authorized_keys/%u) to use C(sshd_authorized_keys).
+      sshd_password_authentication:
+        type: str
+      sshd_allow_users:
+        type: list
+        elements: str
+      sshd_allow_groups:
+        type: list
+        elements: str
+      sshd_ignore_rhosts:
+        type: str
+      sshd_hostbased_authentication:
+        type: str
+      sshd_permit_empty_passwords:
+        type: str
+      sshd_challenge_response_authentication:
+        type: str
+      sshd_kbd_interactive_authentication:
+        type: str
+      sshd_x11_forwarding:
+        type: str
+      sshd_x11_display_offset:
+        type: int
+      sshd_print_motd:
+        type: str
+      sshd_print_last_log:
+        type: str
+      sshd_tcp_keep_alive:
+        type: str
+      sshd_max_startups:
+        type: str
+      sshd_client_alive_interval:
+        type: int
+      sshd_client_alive_count_max:
+        type: int
+      sshd_use_pam:
+        type: str
+      sshd_use_dns:
+        type: str
+      sshd_sftp_chroot:
+        type: str
+      sshd_sftp_chroot_group:
+        type: str
+      sshd_sftp_chroot_directory:
+        type: str
+      sshd_stream_local_bind_unlink:
+        type: str
+      sshd_allow_agent_forwarding:
+        type: str
+      sshd_header:
+        type: str
+        description:
+          - Header comment line of sshd_config. Defaults to a value depending on the Debian release.
+      sshd_authorized_keys:
+        type: list
+        elements: dict
+        description:
+          - Manage authorized keys globally and exclusively below C(/etc/ssh/authorized_keys). Only evaluated if C(sshd_authorized_keys_file) is C(/etc/ssh/authorized_keys/%u), in which case it is required.
+        options:
+          user:
+            type: str
+            required: true
+          key:
+            type: raw
+            description:
+              - A public key or a list of public keys.
+          src:
+            type: path
+            description:
+              - Link the authorized keys file of the user to this path (used if C(key) is not set).
