@@ -93,7 +93,8 @@ argument_specs:
         type: list
         elements: dict
         description:
-          - Manage authorized keys globally and exclusively below C(/etc/ssh/authorized_keys). Only evaluated if C(sshd_authorized_keys_file) is C(/etc/ssh/authorized_keys/%u), in which case it is required.
+          - Manage authorized keys globally and exclusively below C(/etc/ssh/authorized_keys). Only evaluated if C(sshd_authorized_keys_file) is
+            C(/etc/ssh/authorized_keys/%u), in which case it is required.
         options:
           user:
             type: str

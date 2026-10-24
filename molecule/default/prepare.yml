@@ -4,5 +4,5 @@
   become: true
   tasks:
     - name: Run the equivalent of "apt-get update" before installing packages
-      apt:
-        update_cache: yes
+      ansible.builtin.apt:
+        update_cache: true
