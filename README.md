@@ -1,7 +1,7 @@
 ansible-sshd
 ============
 
-[![Build Status](https://github.com/systemli/ansible-role-sshd/workflows/Integration/badge.svg?branch=main)](https://github.com/systemli/ansible-role-sshd/actions?query=workflow%3AIntegration)
+[![Build Status](https://github.com/systemli/ansible-sshd/workflows/Integration/badge.svg?branch=main)](https://github.com/systemli/ansible-sshd/actions?query=workflow%3AIntegration)
 [![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-sshd-blue.svg)](https://galaxy.ansible.com/systemli/sshd/)
 
 Role to install & maintain the OpenSSH Daemon. Supports centralized authorized key management.
@@ -82,12 +82,14 @@ Example Playbook
 Testing & Development
 ---------------------
 
-Molecule, Docker, and Github Actions are used for continous testing.
-You can easily test the role locally with
+Molecule with the Docker driver and GitHub Actions are used for continuous testing.
+CI runs the role on Debian 12 and 13. You can test the role locally with
 
     molecule test
 
-This requires Molecule, Vagrant and `python-vagrant` to be installed.
+This requires Docker (or a compatible container runtime), `molecule`,
+`molecule-plugins[docker]` and `ansible-lint` to be installed.
+The local scenario in `molecule/default` uses Debian 13.
 
 License
 -------

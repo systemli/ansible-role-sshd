@@ -1,7 +1,7 @@
 ---
 - name: Prepare
   hosts: all
-  become: True
+  become: true
   tasks:
     - name: Run the equivalent of "apt-get update" before installing packages
       apt:
