@@ -11,122 +11,84 @@ argument_specs:
         elements: int
         description:
           - List of ports to listen on.
-        default:
-          - 22
       sshd_host_keys:
         type: list
         elements: str
         description:
           - Host key types (for example C(rsa), C(ecdsa), C(ed25519)).
-        default:
-          - rsa
-          - ecdsa
-          - ed25519
       sshd_listen_address:
         type: list
         elements: str
         description:
           - List of addresses to listen on. If empty, all IPv4 and IPv6 addresses are used.
-        default: []
       sshd_syslog_facility:
         type: str
-        default: AUTH
       sshd_log_level:
         type: str
-        default: INFO
       sshd_login_grace_time:
         type: str
-        default: 2m
       sshd_permit_root_login:
         type: str
-        default: 'no'
       sshd_strict_modes:
         type: str
-        default: 'yes'
       sshd_pubkey_authentication:
         type: str
-        default: 'yes'
       sshd_authorized_keys_file:
         type: str
         description:
           - Value of C(AuthorizedKeysFile). Set to C(/etc/ssh/authorized_keys/%u) to use C(sshd_authorized_keys).
-        default: .ssh/authorized_keys
       sshd_password_authentication:
         type: str
-        default: 'no'
       sshd_allow_users:
         type: list
         elements: str
-        default: []
       sshd_allow_groups:
         type: list
         elements: str
-        default: []
       sshd_ignore_rhosts:
         type: str
-        default: 'yes'
       sshd_hostbased_authentication:
         type: str
-        default: 'no'
       sshd_permit_empty_passwords:
         type: str
-        default: 'no'
       sshd_challenge_response_authentication:
         type: str
-        default: 'no'
       sshd_kbd_interactive_authentication:
         type: str
-        default: 'no'
       sshd_x11_forwarding:
         type: str
-        default: 'no'
       sshd_x11_display_offset:
         type: int
-        default: 10
       sshd_print_motd:
         type: str
-        default: 'no'
       sshd_print_last_log:
         type: str
-        default: 'no'
       sshd_tcp_keep_alive:
         type: str
-        default: 'yes'
       sshd_max_startups:
         type: str
-        default: 10:30:100
       sshd_client_alive_interval:
         type: int
-        default: 3600
       sshd_client_alive_count_max:
         type: int
-        default: 3
       sshd_use_pam:
         type: str
-        default: 'yes'
       sshd_use_dns:
         type: str
-        default: 'no'
       sshd_sftp_chroot:
         type: str
-        default: 'no'
       sshd_sftp_chroot_group:
         type: str
-        default: sftponly
       sshd_sftp_chroot_directory:
         type: str
-        default: '%h'
       sshd_stream_local_bind_unlink:
         type: str
-        default: 'no'
       sshd_allow_agent_forwarding:
         type: str
-        default: 'no'
       sshd_header:
         type: str
         description:
           - Header comment line of sshd_config. Defaults to a value depending on the Debian release.
-        default: '{{ lookup(''vars'', ''sshd_header_'' + ansible_distribution_release, default=sshd_header_buster) }}'
       sshd_authorized_keys:
         type: list
         elements: dict
